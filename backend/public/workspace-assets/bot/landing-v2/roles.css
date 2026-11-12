@@ -1,0 +1,35 @@
+/* Reuse the original role badge and marquee styles for employer badges. */
+.ff-role-employer-rows.framer-nQF8T { gap: 8px; }
+.ff-role-employer-rows .framer-Khn6s { height: 36px; }
+.ff-role-employer-rows .framer-1oe6zo2 { max-width: 600px; }
+.ff-employer-marquee .framer-vlvfd p {
+  color: var(--token-1d0b89a9-1552-4f1c-8998-fe36cd3945bc, #171717);
+}
+.ff-employer-marquee .framer-rufw3n-container { opacity: .8; }
+.ff-employer-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--token-1d0b89a9-1552-4f1c-8998-fe36cd3945bc, #171717);
+  mask-image: var(--employer-icon);
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ff-employer-marquee .ff-employer-repeat { display: none; }
+  .ff-role-employer-rows .framer-1oe6zo2 { justify-content: center; }
+  .ff-employer-marquee { transform: none !important; }
+}
+
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .ff-role-employer-rows .framer-1oe6zo2 { max-width: 500px; }
+}
+
+/* Bring the merged roles section closer to the hero demo. */
+.framer-ZqkDY .framer-18gp9wj { padding-bottom: 48px; }
+.framer-ZqkDY .framer-1lcodah { padding-top: 48px; }
+@media (max-width: 809.98px) {
+  .framer-ZqkDY .framer-18gp9wj { padding-bottom: 32px; }
+  .framer-ZqkDY .framer-1lcodah { padding-top: 40px; }
+}

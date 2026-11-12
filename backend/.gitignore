@@ -1,0 +1,6 @@
+.vercel
+.env*.local
+/.swc
+
+.playwright-cli/
+*.tsbuildinfo

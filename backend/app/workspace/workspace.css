@@ -1,0 +1,224 @@
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css" source(none);
+@import "tw-animate-css";
+@source "./";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-icon: var(--sidebar-icon);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+.workspace-theme {
+  --background: #fff;
+  --foreground: #0d0d0d;
+  --card: #fff;
+  --card-foreground: var(--foreground);
+  --popover: #fff;
+  --popover-foreground: var(--foreground);
+  --primary: #0d0d0d;
+  --primary-foreground: #fff;
+  --secondary: #f0f0f0;
+  --secondary-foreground: #0d0d0d;
+  --muted: #f0f0f0;
+  --muted-foreground: #64645f;
+  --accent: #f0f0f0;
+  --accent-foreground: #0d0d0d;
+  --destructive: #b33a36;
+  --border: #e9e9e7;
+  --input: #e4e4e1;
+  --ring: #727272;
+  --sidebar: #fafaf9;
+  --sidebar-foreground: #171717;
+  --sidebar-icon: #777770;
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: #efefed;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #e9e9e7;
+  --sidebar-ring: #727272;
+  --radius: 0.8125rem;
+  color-scheme: light;
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  line-height: 1.5;
+}
+.workspace-theme.dark {
+  --background: #171717;
+  --foreground: #ededed;
+  --card: #171717;
+  --card-foreground: var(--foreground);
+  --popover: #222222;
+  --popover-foreground: var(--foreground);
+  --primary: #ededed;
+  --primary-foreground: #171717;
+  --secondary: #222222;
+  --secondary-foreground: #ededed;
+  --muted: #222222;
+  --muted-foreground: #bdbdbd;
+  --accent: #343434;
+  --accent-foreground: #ededed;
+  --destructive: #f09a93;
+  --border: #383838;
+  --input: #454545;
+  --ring: #b5b5b5;
+  --sidebar: #121212;
+  --sidebar-foreground: #ededed;
+  --sidebar-icon: #bdbdbd;
+  --sidebar-accent: #292929;
+  --sidebar-accent-foreground: #ededed;
+  --sidebar-border: #383838;
+  --sidebar-ring: #b5b5b5;
+  color-scheme: dark;
+}
+.workspace-theme.dark[data-theme="ink-2"] {
+  --background: #151515;
+  --card: #151515;
+  --foreground: #e5e5e5;
+  --popover: #212121;
+  --primary: #ededed;
+  --primary-foreground: #151515;
+  --secondary: #222222;
+  --secondary-foreground: #e5e5e5;
+  --muted: #252525;
+  --muted-foreground: #ababab;
+  --accent: #303030;
+  --accent-foreground: #f0f0f0;
+  --border: #353535;
+  --input: #3a3a3a;
+  --ring: #a8a8a8;
+  --sidebar: #121212;
+  --sidebar-foreground: #c8c8c8;
+  --sidebar-icon: #a4a4a4;
+  --sidebar-accent: #272727;
+  --sidebar-accent-foreground: #f0f0f0;
+  --sidebar-border: #292929;
+  --sidebar-ring: #a8a8a8;
+  --composer-surface: #1e1e1e;
+  --composer-border: #353535;
+}
+.workspace-theme.dark[data-theme="ink-2"] [data-slot="sidebar-container"] { border-color: var(--sidebar-border); }
+.workspace-theme.dark[data-theme="ink-2"] [data-slot="input-group"] {
+  background: var(--composer-surface);
+  border-color: var(--composer-border);
+}
+.workspace-theme.dark[data-theme="ink-2"] [data-slot="input-group"]:has([data-slot="input-group-control"]:focus-visible) { border-color: var(--ring); }
+.workspace-theme.dark[data-theme="og-dark"] {
+  --background: #20201e; --foreground: #e4e4e0; --card: #20201e; --popover: #262624;
+  --primary: #e4e4e0; --primary-foreground: #20201e;
+  --secondary: #30302d; --secondary-foreground: #e4e4e0;
+  --muted: #30302d; --muted-foreground: #b3b3aa;
+  --accent: #30302d; --accent-foreground: #e4e4e0;
+  --destructive: #ed9287; --border: #3a3a35; --input: #41413b; --ring: #aaa;
+  --sidebar: #242422; --sidebar-foreground: #e4e4e0; --sidebar-icon: #b3b3aa;
+  --sidebar-accent: #33332f; --sidebar-accent-foreground: #e4e4e0;
+  --sidebar-border: #3a3a35; --sidebar-ring: #aaa;
+}
+@layer base {
+  .workspace-theme,
+  .workspace-theme *,
+  .workspace-theme *::before,
+  .workspace-theme *::after {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+  }
+  .workspace-theme :where(button, input, textarea, select) {
+    font: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+  }
+  .workspace-theme :where(form, label) {
+    display: revert;
+    gap: revert;
+  }
+  .workspace-theme :where(h1, h2, h3, p) {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  .workspace-theme :where(a) {
+    color: inherit;
+    text-decoration: none;
+  }
+  .workspace-theme :where(ul, ol) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .workspace-theme :where(main) {
+    width: auto;
+    margin: 0;
+    max-width: none;
+  }
+  .workspace-theme :where(button) {
+    cursor: pointer;
+  }
+  .workspace-theme :where(button:disabled) {
+    cursor: default;
+  }
+}
+.workspace-theme .markdown p {
+  margin: 0 0 1em;
+}
+.workspace-theme .markdown :where(ul, ol) {
+  padding-left: 1.5rem;
+  list-style: revert;
+  margin-bottom: 1em;
+}
+.workspace-theme .markdown pre {
+  overflow: auto;
+  padding: 1rem;
+  background: var(--muted);
+  border-radius: 12px;
+}
+.workspace-theme .markdown a {
+  text-decoration: underline;
+}
+
+.workspace-theme {
+  color-scheme: light;
+}
+.workspace-theme.dark {
+  color-scheme: dark;
+}
+
+.workspace-theme[data-workspace-root] {
+  min-height: 100svh;
+}

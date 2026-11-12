@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+.swc/
+backend/app/.well-known/workflow/
+dist/
+build/
+coverage/
+*.log
+.vercel/
+.playwright-cli/
+*.tsbuildinfo
+*.pem
+*.key

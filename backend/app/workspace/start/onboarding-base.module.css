@@ -1,0 +1,116 @@
+/* Keep the onboarding palette and motion scoped; follow the app theme. */
+.reference {
+  --ref-background: var(--background);
+  --ref-text: var(--foreground);
+  --ref-muted: var(--muted-foreground);
+  --ref-selected: var(--muted);
+  --ref-green: light-dark(#319755, #85d6a0);
+  --ref-yellow: light-dark(#c49a00, #e2c65b);
+  --ref-font:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ref-title-size: 30px;
+  --ref-body-size: 16px;
+  --ref-column: 320px;
+  background: var(--ref-background);
+  color: var(--ref-text);
+  font-family: var(--ref-font);
+  font-size: var(--ref-body-size);
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  padding: 48px 24px;
+}
+.reference * {
+  box-sizing: border-box;
+}
+.reference h1 {
+  font-size: var(--ref-title-size);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.75px;
+  text-align: center;
+  margin: 0;
+  outline: none;
+}
+.reference button,
+.reference a {
+  -webkit-tap-highlight-color: transparent;
+}
+.reference button {
+  font-family: inherit;
+  cursor: pointer;
+}
+.reference button:focus-visible,
+.reference a:focus-visible {
+  outline: 2px solid light-dark(#727272, #aaa);
+  outline-offset: 4px;
+}
+.description {
+  color: var(--ref-muted);
+  font-size: var(--ref-body-size);
+  line-height: 24px;
+  margin: 18px 0 0;
+  text-align: center;
+}
+.reasonScreen {
+  width: var(--ref-column);
+  max-width: 100%;
+}
+.reasons {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+.reason {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 56px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  text-align: left;
+  background: transparent;
+  color: var(--ref-text);
+  font-size: 16px;
+}
+.reason:hover,
+.reason[aria-pressed="true"] {
+  background: var(--ref-selected);
+}
+.reason .check {
+  margin-left: auto;
+}
+.check {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--ref-text);
+  color: light-dark(#fff, #1e1e1e);
+  width: 16px;
+  height: 16px;
+}
+.check svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.5;
+}
+.actions {
+  width: var(--ref-column);
+  max-width: 100%;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+}
+
+@media (max-width: 800px) {
+  .reference h1 {
+    font-size: 28px;
+  }
+}

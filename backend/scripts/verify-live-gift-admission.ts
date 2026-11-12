@@ -1,0 +1,48 @@
+/** Local fixture-only admission, feedback provenance and stale-approval checks. */
+import assert from "node:assert/strict";
+import { randomUUID } from "node:crypto";
+import { betterAuth } from "better-auth";
+import { authPool } from "../lib/auth";
+import { createChat, acceptTurn, saveReply } from "../lib/workspace-chat";
+import { startGiftDraft, updateGiftDraft, shareWorkspaceContext, shareGroupFeedback, readWorkspaceFlows } from "../lib/workspace-flows";
+import { admitGiftJob, readGiftState, selectGiftOption, setGiftLimit } from "../lib/gift-store";
+const base = "http://localhost:3016";
+const auth = betterAuth({ secret: process.env.BETTER_AUTH_SECRET, baseURL: base, database: authPool, user: { modelName: "auth_users" }, session: { modelName: "auth_sessions" }, account: { modelName: "auth_accounts" }, verification: { modelName: "auth_verifications" }, emailAndPassword: { enabled: true } });
+const response = await auth.api.signUpEmail({ body: { email: `gift-admit-${randomUUID()}@example.invalid`, name: "Synthetic organizer", password: randomUUID() + randomUUID() }, asResponse: true });
+assert.equal(response.status, 200);
+const { user } = await response.json(); const chat = randomUUID();
+try {
+  await createChat(user.id, chat, "shopping");
+  const sharedId = randomUUID(), reply = randomUUID();
+  await acceptTurn(user.id, { conversationId: chat, requestId: reply, messageId: sharedId, text: "A gift for hosting at a new home", mode: "shopping", revision: 0 });
+  await saveReply(reply, "Understood", "completed");
+  await startGiftDraft(user.id, chat);
+  await updateGiftDraft(user, chat, { participantChoice: "solo" });
+  await updateGiftDraft(user, chat, { title: "Housewarming" });
+  const gift = (await readWorkspaceFlows(user.id, chat)).find((item: any) => item.kind === "gift") as any;
+  const groupId = gift.state.group.id;
+  await setGiftLimit(user.id, groupId, 10000);
+  await shareWorkspaceContext(user.id, chat, sharedId, true);
+  const first = randomUUID();
+  await admitGiftJob(user.id, groupId, first, "plan", undefined, Date.now() + 30000);
+  await admitGiftJob(user.id, groupId, first, "plan", undefined, Date.now() + 30000);
+  const count = (await authPool.query("SELECT count(*)::int AS count FROM gift_jobs WHERE id=$1", [first])).rows[0].count;
+  assert.equal(count, 1);
+  await authPool.query("UPDATE gift_jobs SET status='ready',result=$2 WHERE id=$1", [first, JSON.stringify({ options: [{ id: "0", title: "Sample fixture", lines: [{ title: "Fixture board", merchant: "fixture.invalid" }] }] })]);
+  await shareGroupFeedback(user.id, chat, randomUUID(), "No glass; more like the first board");
+  await assert.rejects(() => selectGiftOption(user.id, groupId, first, "0"), /GIFT_PLAN_STALE/);
+  const before = await readGiftState(user.id, groupId);
+  assert.ok("jobs" in before);
+  assert.equal(before.jobs.find((job: any) => job.id === first)?.historical, true);
+  const next = randomUUID();
+  await admitGiftJob(user.id, groupId, next, "plan", undefined, Date.now() + 30000);
+  const input = (await authPool.query("SELECT input FROM gift_jobs WHERE id=$1", [next])).rows[0].input;
+  assert.equal(input.soloPerspectives, true);
+  assert.equal(input.previousOptions[0].products[0].title, "Fixture board");
+  assert.ok(input.facts.some((fact: any) => /no glass/i.test(fact.content)));
+  await shareWorkspaceContext(user.id, chat, sharedId, false);
+  const after = await readGiftState(user.id, groupId);
+  assert.ok("jobs" in after);
+  assert.equal(after.jobs.find((job: any) => job.id === first)?.result, null);
+  console.log(JSON.stringify({ passed: true, duplicateAdmissionIdempotent: true, previousOptionsInFeedback: true, staleSelectionRejected: true, withdrawalRedactedHistory: true }));
+} finally { await authPool.query("DELETE FROM auth_users WHERE id=$1", [user.id]); await authPool.end(); }

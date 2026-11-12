@@ -1,0 +1,8 @@
+[
+  {"id":"dallas", "split":"development", "brief":"Plan a group gift", "title":"Dallas trip gift", "review":"Recognize that the purpose or direction of the trip gift is unclear; avoid treating a generic occasion as the only important question."},
+  {"id":"parents", "split":"development", "brief":"Plan a group thank-you gift", "title":"Nicola’s parents thank-you gift", "review":"Use the thank-you context and identify the recipients as Nicola’s parents; ask about their preferences or relevant context rather than the occasion."},
+  {"id":"retirement", "split":"development", "brief":"Plan a group gift for our coworker Maya retiring after 25 years; she loves gardening and hates clutter.", "title":"Maya’s retirement", "review":"Do not ask who, why, interests or already stated exclusions; ask a useful unresolved detail or proceed."},
+  {"id":"wedding", "split":"held-out", "brief":"Help me plan a group gift", "title":"Priya and Sam wedding", "review":"Recognize a wedding for Priya and Sam; do not ask the occasion; a registry, preferences or gift constraints would be relevant."},
+  {"id":"new-home", "split":"held-out", "brief":"Plan a group gift", "title":"Alex new apartment", "review":"Recognize the likely new-home context while acknowledging uncertainty; ask about needs, preferences or relationship rather than an unrelated occasion."},
+  {"id":"ambiguous", "split":"held-out", "brief":"Plan a group gift", "title":"Blue bird", "review":"Do not invent a recipient, event, hobby or product. Ask an open, useful clarification and allow an answer outside suggested options."}
+]

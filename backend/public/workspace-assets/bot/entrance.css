@@ -1,0 +1,26 @@
+/* x.ai home entrance measurements, 2026-10-30. Content stays readable without JS. */
+.framer-1fnjtpa h1 { perspective: 1200px; }
+.framer-1fnjtpa h1 > span { display: inline-block; position: relative; }
+
+/* Only enabled by the tiny head bootstrap; no JS leaves the page fully visible.
+   These states exist before first paint, then WAAPI takes over atomically. */
+html.entrance-pending .framer-1fnjtpa h1 > span {
+  opacity: 0;
+  transform: translateY(45%) rotateX(-40deg);
+}
+html.entrance-pending .framer-1oqa9v2,
+html.entrance-pending .tovi-hero-action,
+html.entrance-pending .framer-15yv6jr,
+html.entrance-pending .framer-1pn4jri-container,
+html.entrance-pending main > .framer-18gp9wj ~ section,
+.entrance-waiting { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.entrance-pending .framer-1fnjtpa h1 > span,
+  html.entrance-pending .framer-1oqa9v2,
+  html.entrance-pending .tovi-hero-action,
+  html.entrance-pending .framer-15yv6jr,
+  html.entrance-pending .framer-1pn4jri-container,
+  html.entrance-pending main > .framer-18gp9wj ~ section,
+  .entrance-waiting { opacity: 1; transform: none; }
+}

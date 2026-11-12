@@ -1,0 +1,57 @@
+@layer legacy {
+  :root {
+    color-scheme: light;
+    font-family: system-ui, sans-serif;
+    color: #242921;
+    background: #f6f5ef;
+  }
+  body {
+    margin: 0;
+  }
+  body:not(:has([data-workspace-root])) {
+    .app-frame {
+      width: min(100% - 3rem, 35rem);
+      margin: 3rem auto;
+    }
+    form,
+    label {
+      display: grid;
+      gap: 0.65rem;
+    }
+    form {
+      gap: 1rem;
+    }
+    input,
+    select,
+    button {
+      font: inherit;
+      border: 1px solid #7b8175;
+      border-radius: 0.4rem;
+      padding: 0.65rem;
+    }
+    button {
+      background: #364432;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+    dl {
+      margin: 0.5rem 0;
+    }
+    dl div {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid #c8cbbf;
+    }
+    dd {
+      margin: 0;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+  }
+}

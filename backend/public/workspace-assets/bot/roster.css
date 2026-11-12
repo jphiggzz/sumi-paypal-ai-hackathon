@@ -1,0 +1,12 @@
+/* Content/visual adaptations only; Sumi's layout remains in landing-v2/*.css. */
+html{scroll-behavior:smooth}#how-it-works,#creators,#faq{scroll-margin-top:90px}.ff-company-badge img{display:none!important}.ff-how-it-works-poster,.ff-job-agent-poster,.ff-bento-poster{display:block!important}.framer-1oqa9v2{max-width:540px!important}.roster-dialog{width:min(1100px,94vw);height:min(760px,90dvh);padding:0;border:1px solid #dddddd;border-radius:16px;background:#ffffff;box-shadow:0 30px 120px #00000055}.roster-dialog::backdrop{background:#00000088;backdrop-filter:blur(5px)}.roster-dialog iframe{width:100%;height:calc(100% - 42px);border:0}.roster-close{height:42px;display:flex;justify-content:flex-end;align-items:center;padding:0 14px;background:#fafafa;border-bottom:1px solid #eeeeee}.roster-close button{font:500 13px system-ui;border:0;background:none;cursor:pointer;padding:8px;color:#555555}.roster-close button:focus-visible{outline:2px solid #5b5b5b;outline-offset:2px}.framer-15yv6jr{scroll-margin-top:90px}@media(max-width:809px){.framer-rkfmk .framer-15yv6jr,.framer-rkfmk .framer-ul2suy{height:720px!important;aspect-ratio:auto!important}.roster-dialog{height:92dvh}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Responsive Remotion film in Sumi's original hero media frame. */
+.framer-rkfmk .framer-15yv6jr{height:auto!important}
+.framer-rkfmk .framer-ul2suy{position:relative;height:auto!important;aspect-ratio:16/9!important}
+.roster-film-mount{overflow:hidden;border-radius:inherit;background:#fafafa}
+#roster-hero{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit}
+#roster-film-playback{position:absolute;right:12px;bottom:12px;border:1px solid #dedede;border-radius:7px;padding:6px 10px;font:500 12px system-ui;color:#444444;background:rgba(255,255,255,.94);cursor:pointer}
+#roster-film-playback:focus-visible{outline:2px solid #6f6f6f;outline-offset:3px}
+.roster-film-demo{position:absolute;left:12px;bottom:14px;color:#8c8c8c;font:11px system-ui}
+@media(min-width:360px) and (max-width:809.98px){.framer-rkfmk .framer-ul2suy{aspect-ratio:390/760!important}}
+@media(max-width:359.98px){.framer-rkfmk .framer-ul2suy{aspect-ratio:320/840!important}}

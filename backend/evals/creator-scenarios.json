@@ -1,0 +1,11 @@
+[
+ {"id":"paypal","initial":"Help us get more people using PayPal.","followup":"Developers adding checkout to their apps.","audience":"developers","expected":"api-educator"},
+ {"id":"chatedu","initial":"Help us get more students using ChatEDU.","followup":"College students who want practical study tools. Show me creators.","audience":"students","expected":"student-educator"},
+ {"id":"ag-grid","initial":"I work on AG Grid. Can creators help us?","followup":"React developers building data tables. Practical tutorials please.","audience":"developers","expected":"react-educator"},
+ {"id":"apimatic","initial":"We want more people to try APIMatic.","followup":"API developers who need generated SDKs and reliable integrations.","audience":"developers","expected":"api-educator"},
+ {"id":"bryntum","initial":"Help us promote Bryntum.","followup":"Frontend developers building scheduling interfaces. Show me educators.","audience":"developers","expected":"react-educator"},
+ {"id":"channel3","initial":"How could we grow Channel3 with creators?","followup":"Developers building ecommerce product search and shopping agents, not consumer influencers.","audience":"developers","expected":"search-engineer"},
+ {"id":"elastic","initial":"Help more people discover Elastic.","followup":"Search engineers building retrieval for AI applications. No generic AI commentary.","audience":"developers","expected":"search-engineer"},
+ {"id":"postman","initial":"We need more people using Postman.","followup":"API developers learning hands-on API testing, not broad tech news.","audience":"developers","expected":"api-educator"},
+ {"id":"render","initial":"Find a way to promote Render.","followup":"Independent developers deploying web apps. Practical deployment tutorials.","audience":"developers","expected":"deployment-builder"}
+]

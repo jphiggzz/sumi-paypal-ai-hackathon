@@ -1,0 +1,6 @@
+[
+  {"id":"new-flat","split":"comparison","brief":"Plan a gift for Alex's new apartment. I don't know what they need.","title":"Alex new apartment","review":"Offer usable gift directions, not a request to list needs; do not invent Alex's preferences."},
+  {"id":"travel-ambiguous","split":"comparison","brief":"Help me plan a Dallas trip gift.","title":"Dallas trip gift","review":"Clarify the trip's role without assuming the recipient or direction; interpretations should be single-choice."},
+  {"id":"no-food","split":"comparison","brief":"Thank-you gift for our hosts; no food, flowers, or clutter.","title":"Cabin hosts thank you","review":"Respect exclusions and offer plausible directions without treating guesses as known preferences."},
+  {"id":"specific","split":"comparison","brief":"A gift for my sister who loves hiking, has limited storage, and wants a lightweight daypack.","title":"Sister's hiking gift","review":"Use the supplied direction and constraints; do not ask what kind of gift or suggest unrelated categories."}
+]

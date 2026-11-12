@@ -1,0 +1,5 @@
+[
+  {"id":"cabin-host", "split":"held-out", "brief":"Plan a group gift for the friend who hosted us at their cabin last weekend.", "title":"Cabin host thank-you", "review":"Use the known host and thank-you purpose. Ask about a preference or relevant practical constraint, rather than asking who the recipient is or what the occasion is."},
+  {"id":"new-baby", "split":"held-out", "brief":"Plan a group gift", "title":"Ari’s new baby", "review":"Recognize the baby context without assuming whether the gift is for the baby, a parent or the family; an open preferences question or that distinction is acceptable."},
+  {"id":"recovery", "split":"held-out", "brief":"Plan a group gift for Nina recovering from surgery; she cannot have flowers.", "title":"Nina recovery gift", "review":"Do not ask who it is for, why or suggest flowers. Ask about a relevant preference or practical need, and preserve the exclusion."}
+]

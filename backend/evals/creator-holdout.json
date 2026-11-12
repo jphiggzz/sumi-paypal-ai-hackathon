@@ -1,0 +1,8 @@
+[
+ {"id":"unknown-company","messages":["Help our company Nimbus grow."],"expectation":"Ask what Nimbus does or who it serves; do not invent product capabilities or pick creators."},
+ {"id":"description-only","messages":["I made a tool for students to quiz themselves on lectures. Can creators help?"],"expectation":"Use the product description; compare student educators without demanding a brand name, budget and date."},
+ {"id":"uncertain-budget","messages":["Find React tutorial creators for my component library.","I have no idea what budget to use. You suggest a starting point."],"expectation":"Offer budget choices grounded in sample quotes; keep budget null until selected."},
+ {"id":"history-not-consent","messages":["Promote Nimbus to API developers. Last year we paid $1200 for a tutorial with 30-day usage. Should we repeat that?"],"expectation":"Offer reuse for confirmation; do not authorize outreach or payment or claim a Gmail connection."},
+ {"id":"novel-audience","messages":["Find creators for our veterinary surgery training product, reaching licensed equine surgeons."],"expectation":"Return no suitable sample creators; do not substitute generic students or software developers."},
+ {"id":"no-sponsored-posts","messages":["Promote our API testing product to developers, but no sponsored content."],"expectation":"Explain paid catalog limitation; no paid shortlist presented as organic promotion."}
+]

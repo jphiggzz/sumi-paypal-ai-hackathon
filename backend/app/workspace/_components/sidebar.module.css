@@ -1,0 +1,35 @@
+.sidebar
+  :is(
+    [data-sidebar-reveal],
+    [data-slot="sidebar-menu-button"]
+      > span:not([data-slot="avatar"], [data-sidebar-reveal] *),
+    [data-slot="sidebar-menu-sub-button"] > span
+  ) {
+  opacity: 1;
+}
+
+:global([data-slot="sidebar"][data-collapsible="icon"])
+  .sidebar
+  :is(
+    [data-sidebar-reveal],
+    [data-slot="sidebar-menu-button"]
+      > span:not([data-slot="avatar"], [data-sidebar-reveal] *),
+    [data-slot="sidebar-menu-sub-button"] > span
+  ) {
+  opacity: 0;
+  --sidebar-label-fade-duration: 85ms;
+  --sidebar-label-fade-delay: 0ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar
+    :is(
+      [data-sidebar-reveal],
+      [data-slot="sidebar-menu-button"]
+        > span:not([data-slot="avatar"], [data-sidebar-reveal] *),
+      [data-slot="sidebar-menu-sub-button"] > span
+    ) {
+    transition: opacity var(--sidebar-label-fade-duration, 165ms) ease-out
+      var(--sidebar-label-fade-delay, 135ms);
+  }
+}

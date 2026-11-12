@@ -1,0 +1,12 @@
+/* Approved atmospheric footer. The wave is decorative; links stay above it. */
+.ff-atmospheric-footer{position:relative;isolation:auto;z-index:auto!important;min-height:500px;padding:32px 0 64px}
+.ff-atmospheric-footer>footer,.ff-atmospheric-footer>.ssr-variant{position:relative;z-index:2}
+.ff-atmospheric-footer footer{background:transparent!important;height:auto!important;padding:72px 30px 96px!important}
+.ff-footer-wave{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.ff-footer-wave-mount{position:absolute;inset:0;opacity:.42;mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.12) 30%,#000000 100%);background:radial-gradient(ellipse at 25% 90%,#6c6c6c30,transparent 60%),radial-gradient(ellipse at 80% 100%,#6c6c6c20,transparent 60%)}
+.ff-footer-wave-pause{position:absolute;bottom:16px;right:20px;z-index:3;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid #88888833;border-radius:8px;background:transparent;color:inherit;opacity:.65;cursor:pointer}
+.ff-footer-wave-pause:hover,.ff-footer-wave-pause:focus-visible{opacity:1;background:#88888811}
+.ff-footer-wave-pause:focus-visible{outline:2px solid #6c6c6c;outline-offset:3px}
+.ff-footer-wave-pause[hidden]{display:none}
+.ff-footer-wave-pause svg{width:14px;height:14px}
+@media(max-width:809px){.ff-atmospheric-footer{min-height:0;padding:20px 0 50px}.ff-atmospheric-footer footer{padding:48px 24px 80px!important}.ff-footer-wave-pause{width:44px;height:44px;right:16px;bottom:12px}}

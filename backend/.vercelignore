@@ -1,0 +1,5 @@
+.env
+.env.*
+.playwright-cli
+.swc
+app/.well-known/workflow

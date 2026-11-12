@@ -1,0 +1,120 @@
+@font-face{font-family:botManrope;src:url('/fonts/Manrope-Latin-Variable.woff2') format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+:root{--tovi-ink:#232323;--tovi-stone:#b3b3b3;--tovi-chalk:#ededed;--sumi-accent:#4a4a4a;accent-color:#4a4a4a}
+html.dark{
+  --tovi-ink:#181818;--tovi-stone:#a3a3a3;--tovi-chalk:#ededed;
+  --sumi-accent:#d4d4d4;--gray-100:#181818;accent-color:#d4d4d4;
+}
+.framer-rkfmk .framer-text,.roster-dialog{font-family:botManrope,sans-serif!important}
+.ff-wordmark{font-family:botManrope,sans-serif!important;font-size:25px!important;font-weight:600!important;letter-spacing:-1.4px!important;color:var(--tovi-ink)!important;line-height:1!important}
+html.dark .ff-wordmark{color:var(--tovi-chalk)!important}
+.ff-brand-mark{display:none!important}
+img,video,canvas,[data-framer-background-image-wrapper="true"]{filter:grayscale(1)}
+:focus-visible{outline-color:currentColor!important}
+.roster-close button:focus-visible,#roster-film-playback:focus-visible{outline-color:#737373!important}
+.roster-film-mount{background:#ededed}
+#roster-film-playback{background:#fafafa;color:#434343;border-color:#d5d5d5}
+.roster-film-demo{color:#6d6d6d}
+@media(max-width:809px){.ff-wordmark{font-size:23px!important;letter-spacing:-1.2px!important}}
+:root{--tovi-ink:#242321;--tovi-stone:#b7b3aa;--tovi-chalk:#eeede9}
+/* Near-black canvas with neutral raised surfaces in dark mode. */
+html.dark body,html.dark .framer-rkfmk{background-color:#181818!important}
+html.dark body{
+  --token-05073e67-ed4a-422a-a29f-22e6b9fafd5e:#181818;
+  --token-87cae736-d832-47ec-a323-1a8f44cd084c:#222222;
+  --token-14609837-c161-455c-8c4d-560cf871862f:#222222;
+  --token-ec21e988-e9b2-439c-9204-888cbf106092:#262626;
+  --token-8c44f4b6-1a43-4e77-81dd-af1d7863529c:#292929;
+}
+html.dark footer.framer-oTTnT,html.dark .framer-nlap6v-container{background:#181818!important}
+html.dark [style*="background-color:rgb(255,255,255)"],
+html.dark [style*="background-color:rgb(240,240,240)"],
+html.dark [style*="background-color:rgb(235,235,235)"],
+html.dark .framer-xZrkI.framer-v-170rlbg{background-color:#222222!important}
+html.dark [style*="background-color:rgb(245,245,245)"],
+html.dark [style*="background-color:rgb(250,250,250)"]{background-color:#1d1d1d!important}
+html:not(.dark) body,html:not(.dark) .framer-rkfmk{background-color:#eeede9!important}
+
+/* Platform marks retain the existing marquee and theme colors. */
+.ff-employer-marquee .tovi-platform-icon{display:flex!important;align-items:center;justify-content:center;width:40px;min-width:40px;height:24px;line-height:0!important}.tovi-platform-icon svg{display:block;width:24px;height:24px;flex:none}
+
+/* Hide the top navigation at every responsive breakpoint. */
+.framer-rkfmk > .framer-1oudgdb-container{display:none!important}
+
+.framer-1a2wq71:has(.tovi-deal-mount){height:auto!important;aspect-ratio:2/1;box-shadow:none!important;overflow:hidden!important;background:#eeede9}.tovi-deal-mount{position:absolute;inset:0;overflow:hidden;border-radius:inherit}.tovi-deal-video{display:block;width:100%;height:100%;object-fit:contain}.tovi-deal-mount button{position:absolute;bottom:10px;right:10px;border:1px solid #d8d5cf;border-radius:8px;background:#fbfaf7;color:#45433e;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}.tovi-deal-mount button:focus-visible{outline:2px solid currentColor;outline-offset:3px}@media(max-width:809.98px){.framer-1a2wq71:has(.tovi-deal-mount){aspect-ratio:720/800}}
+
+.framer-ruo3er:has(.tovi-deal-mount){mask-image:none!important;-webkit-mask-image:none!important;height:auto!important;box-shadow:none!important;overflow:visible!important}.framer-ruo3er:has(.tovi-deal-mount)::after{display:none!important}
+
+/* Preserve the original descriptive step boxes. */
+.framer-1a2wq71:has(.tovi-deal-mount){aspect-ratio:1280/760!important}
+@media(max-width:809.98px){.framer-1a2wq71:has(.tovi-deal-mount){aspect-ratio:720/960!important}}
+
+/* Platform labels and compact playback controls. */
+.ff-employer-marquee .tovi-platform-icon{width:auto!important;min-width:0!important;gap:8px;line-height:1.4!important}.tovi-platform-icon svg{width:18px;height:18px}.tovi-platform-name{white-space:nowrap}
+#roster-film-playback,.tovi-deal-mount button{font-size:0!important;line-height:0!important;width:32px!important;height:32px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:0!important}
+#roster-film-playback::before,.tovi-deal-mount button::before{content:"";display:block;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;width:16px;height:16px;background:currentColor;mask-size:contain;mask-position:center;mask-repeat:no-repeat}
+#roster-film-playback[aria-label^="Pause"]::before,.tovi-deal-mount button[aria-label^="Pause"]::before{mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M8%205v14M16%205v14%22%20stroke%3D%22black%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
+#roster-film-playback[aria-label^="Play"]::before,.tovi-deal-mount button[aria-label^="Play"]::before{mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m8%205%2011%207-11%207z%22%20fill%3D%22black%22%2F%3E%3C%2Fsvg%3E")}
+#roster-film-playback[aria-label^="Replay"]::before,.tovi-deal-mount button[aria-label^="Replay"]::before{mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M4%2010a8%208%200%201%201%201%208M4%204v6h6%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
+
+/* Match the buyer preview to the neighboring white preview surfaces. */
+.ff-gmail-mockup{background:#fff!important;border-color:rgba(0,0,0,.1)!important}
+
+/* Selected motion: underline only the current scene title. */
+.tovi-step-title{position:relative;width:max-content!important}
+.tovi-step-title::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;opacity:0;transition:transform 300ms cubic-bezier(.22,.75,.25,1),opacity 180ms ease;pointer-events:none}
+.tovi-step-title[aria-current="step"]::after{transform:scaleX(1);opacity:1}
+@media(prefers-reduced-motion:reduce){.tovi-step-title::after{transition:none}}
+
+/* Give the opening headline more space above it at every breakpoint. */
+.framer-rkfmk .framer-18gp9wj{padding-top:184px!important}
+@media(min-width:1200px){.framer-rkfmk .framer-18gp9wj{padding-top:206px!important}}
+@media(max-width:809.98px){.framer-rkfmk .framer-18gp9wj{padding-top:calc(156px + env(safe-area-inset-top, 0px))!important}}
+
+/* Minimal navigation: wordmark and one solid pill action. */
+.tovi-header{position:absolute;top:24px;left:0;width:100%;z-index:20;color:var(--tovi-ink);font-family:botManrope,sans-serif}
+.tovi-nav{display:flex;align-items:center;justify-content:space-between;gap:24px;width:calc(100% - 80px);max-width:1280px;margin:0 auto;min-height:48px}
+.tovi-nav-wordmark{font-size:26px;font-weight:600;letter-spacing:-1.5px;line-height:1;text-decoration:none;color:inherit}
+.tovi-nav-demo{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 22px;min-height:46px;border-radius:999px;background:var(--tovi-ink);color:var(--tovi-chalk);font-size:13px;font-weight:500;line-height:20px;text-decoration:none;white-space:nowrap;transition:opacity 150ms ease}
+.tovi-nav-demo svg{display:block;flex:none}.tovi-nav-demo:hover{opacity:.8}
+.tovi-nav a:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+html.dark .tovi-header{color:var(--tovi-chalk)}html.dark .tovi-nav-demo{background:var(--tovi-chalk);color:var(--tovi-ink)}
+@media(max-width:809.98px){.tovi-header{top:calc(20px + env(safe-area-inset-top,0px))}.tovi-nav{width:calc(100% - 40px);gap:16px}.tovi-nav-wordmark{font-size:24px}.tovi-nav-demo{padding:12px 18px;min-height:44px}}
+@media(prefers-reduced-motion:reduce){.tovi-nav-demo{transition:none}}
+
+/* Button buddy: original character beside the hero's pill action. */
+.tovi-hero-action{display:flex;align-items:center;justify-content:center;gap:6px;width:max-content;max-width:100%;position:relative}
+.tovi-hero-avatar{display:block;width:72px;height:72px;flex:none;padding:0;border:0;background:transparent;color:var(--tovi-ink);border-radius:50%;cursor:pointer}
+.tovi-hero-avatar svg{display:block;width:100%;height:100%;overflow:visible}.tovi-hero-avatar .body{fill:currentColor}.tovi-hero-avatar .eye{fill:var(--tovi-chalk)}
+.tovi-hero-avatar:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+html.dark .tovi-hero-avatar{color:var(--tovi-chalk)}html.dark .tovi-hero-avatar .eye{fill:var(--tovi-ink)}
+
+/* Approved seamless hero: let the product card provide the frame. */
+.roster-film-mount,#roster-hero{filter:none!important}
+.roster-film-mount{background:transparent!important;overflow:visible!important;border-radius:0!important}
+.framer-ul2suy:has(#roster-hero){border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#roster-hero{border-radius:0!important;mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 94%,transparent);mask-composite:intersect}
+@media(max-width:809px){#roster-hero{mask-image:linear-gradient(to right,transparent,#000 2%,#000 98%,transparent),linear-gradient(to bottom,transparent,#000 3%,#000 97%,transparent)}}
+/* The existing light-background export stays unfeathered on the dark theme. */
+html.dark #roster-hero{mask-image:none}
+
+/* Balance the hero paragraph across lines at every screen width. */
+.framer-rkfmk .framer-1oqa9v2 p.framer-text{text-wrap:balance!important}
+
+/* Trim only the film's empty perimeter, retaining the card's rendered size.
+   Desktop crop: 8% each side, 4% top/bottom. Phone: 3% top/bottom.
+   The largest card and its shadow remain inside the visible frame. */
+@media(min-width:810px){
+  .framer-rkfmk .framer-ul2suy:has(#roster-hero){width:84%!important;flex:0 0 84%!important;margin-inline:auto;aspect-ratio:1209.6/745.2!important}
+  #roster-hero{position:absolute;width:119.047619%;height:108.695652%;left:-9.52381%;top:-4.347826%;object-fit:fill;mask-image:none}
+}
+.roster-film-mount:has(#roster-hero){overflow:hidden!important}
+@media(max-width:809.98px){
+  .framer-rkfmk .framer-ul2suy:has(#roster-hero){aspect-ratio:390/714.4!important}
+  #roster-hero{position:absolute;width:100%;height:106.382979%;left:0;top:-3.191489%;object-fit:fill;mask-image:none}
+}
+@media(max-width:359.98px){
+  .framer-rkfmk .framer-ul2suy:has(#roster-hero){aspect-ratio:320/789.6!important}
+}
+
+/* Resolve the film width before its cropped child’s percentage sizing. */
+.framer-rkfmk .framer-15yv6jr:has(#roster-hero){width:100%!important}
