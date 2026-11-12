@@ -4,7 +4,11 @@ Sumi is a connected workspace for creator campaigns, group gifts, and office sho
 
 ## Try the demo
 
-The [production workspace](https://sumi.company) uses Google sign-in and a preview access code shared separately. Google OAuth is in testing, so a judge account may need to be added as a test user. The [release preview](https://sume-candidate-jph-2026.vercel.app) is used for verification.
+1. Open the [production workspace](https://sumi.company) and choose **Get started** → **Creator campaigns**.
+2. Sign in with Google, then enter the preview access code when prompted. Google OAuth is in Testing mode: your Google account must first be added as a test user.
+3. Enter a campaign brief or choose a sample. Review the proposed direction and start the agents. Creator profiles and outreach are fictional; payments are PayPal Sandbox transactions.
+
+Judges: see the private testing instructions in the Devpost submission for the access arrangements. The [release preview](https://sume-candidate-jph-2026.vercel.app) is used for verification.
 
 ## Run locally
 
@@ -26,7 +30,7 @@ Open http://localhost:3000. See `backend/.env.example` for configuration names. 
 - Group gifts use participant-controlled context sharing and individual Sandbox contributions. Retailer purchasing is a separate handoff.
 - Office shopping uses reviewed baskets and labeled simulated supplier activity; external retailer fulfillment is not connected.
 
-AI proposes actions; server-side validation and explicit human approval control payments. Sandbox receipts do not represent real commerce.
+The app uses Google Gemini 2.5 Flash Lite through Vercel AI Gateway for campaign clarification and creator reviews, PayPal Payouts in Sandbox for creator installments, and PayPal Orders and Checkout in Sandbox for gift and office contributions. Bryntum TaskBoard displays campaign progress, and Channel3 provides configured gift product discovery. AI proposes actions; server-side validation and explicit human approval control payments. Sandbox receipts do not represent real commerce.
 
 ## Checks
 
