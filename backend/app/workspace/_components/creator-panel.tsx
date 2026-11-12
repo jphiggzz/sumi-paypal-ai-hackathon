@@ -6,6 +6,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { BriefcaseBusiness, ChevronDown, ChevronRight, FileText, Search, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Button } from "./ui/button";
+import { useSidebar } from "./ui/sidebar";
 import { Tooltip, TooltipTrigger, TooltipContent } from "./ui/tooltip";
 import { creators } from "../../../lib/creator/catalog";
 import { compactAgentSummary } from "../../../lib/creator/summary";
@@ -709,6 +710,8 @@ function BoardDialog({
   onSelect: (id: string) => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const { state: sidebarState, isMobile } = useSidebar();
+  const sidebarWidth = isMobile ? "0px" : sidebarState === "expanded" ? "var(--sidebar-width)" : "var(--sidebar-width-icon)";
   useEffect(() => {
     dialog.current?.showModal();
     return () => dialog.current?.close();
@@ -719,17 +722,16 @@ function BoardDialog({
       aria-labelledby="creator-board-title"
       onCancel={onClose}
       onClose={onClose}
-      className="m-auto w-[calc(100%-2rem)] max-w-6xl max-h-[85vh] overflow-auto rounded-2xl border border-border bg-background p-5 text-foreground shadow-xl backdrop:bg-black/30"
+      style={{ left: sidebarWidth, width: `calc(100% - ${sidebarWidth})` }}
+      className="fixed inset-y-0 right-0 m-0 h-dvh max-h-none max-w-none overflow-hidden border-0 bg-background p-0 text-foreground backdrop:bg-transparent"
     >
-      <div className="mb-4 flex justify-between gap-3">
-        <h2 id="creator-board-title" className="font-medium">
-          {state.brief.brand} campaign
-        </h2>
-        <Button variant="ghost" onClick={onClose}>
-          Close board
-        </Button>
-      </div>
+      <div className="flex h-full flex-col gap-5 p-5 sm:p-7">
+        <div className="flex items-center justify-between gap-3">
+          <h2 id="creator-board-title" className="text-xl font-medium">{state.brief.brand || "Creator"} campaign</h2>
+          <Button variant="ghost" onClick={onClose}>Close board</Button>
+        </div>
       <Board state={state} onSelect={onSelect} />
+      </div>
     </dialog>
   );
 }

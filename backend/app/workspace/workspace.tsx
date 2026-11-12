@@ -155,6 +155,7 @@ export default function Workspace() {
   const [admission, setAdmission] = useState<"checking" | "allowed" | "denied" | "error">("checking");
   const [entryCode, setEntryCode] = useState("");
   const [entryError, setEntryError] = useState("");
+  const [judgeBusy, setJudgeBusy] = useState(false);
   const abort = useRef<AbortController | null>(null),
     inFlight = useRef(false),
     composer = useRef<HTMLFormElement>(null),
@@ -261,6 +262,18 @@ export default function Workspace() {
     }).catch(() => { if (!cancelled) setAdmission("error"); });
     return () => { cancelled = true; };
   }, [user?.id, codeReady, code, chat?.id, query]);
+  async function submitJudgeCode(event: React.FormEvent) {
+    event.preventDefault();
+    setEntryError("");
+    setJudgeBusy(true);
+    try {
+      const response = await fetch("/api/judge-access", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: entryCode }) });
+      if (!response.ok) { setEntryError(response.status === 429 ? "Access limit reached. Try again later." : "Couldn’t start a session. Check the code and try again."); return; }
+      sessionStorage.setItem("sume.workspace.code", entryCode);
+      location.assign("/workspace?mode=creators");
+    } catch { setEntryError("Couldn’t start a session. Try again."); }
+    finally { setJudgeBusy(false); }
+  }
   async function submitAccessCode(event: React.FormEvent) {
     event.preventDefault();
     setEntryError("");
@@ -560,6 +573,16 @@ export default function Workspace() {
         setError("Connection interrupted. Reload to check the saved reply.");
       }
     }
+  }
+  if (!session.isPending && !user && query.get("judge") === "1") {
+    return <div className="workspace-theme flex min-h-svh items-center justify-center bg-background px-5 text-foreground">
+      <form onSubmit={submitJudgeCode} className="w-full max-w-sm space-y-5">
+        <h1 className="text-2xl font-semibold tracking-tight">Judge access</h1>
+        <input autoFocus aria-label="Judge access code" type="password" autoComplete="off" value={entryCode} onChange={event => setEntryCode(event.target.value)} className="w-full rounded-xl border border-input bg-background px-4 py-3" />
+        {entryError && <p role="alert" className="text-sm text-destructive">{entryError}</p>}
+        <Button type="submit" disabled={!entryCode.trim() || judgeBusy} className="w-full rounded-full">{judgeBusy ? "Starting…" : "Continue"}</Button>
+      </form>
+    </div>;
   }
   if (user && (!codeReady || admission !== "allowed")) {
     return <div className="workspace-theme flex min-h-svh items-center justify-center bg-background px-5 text-foreground">

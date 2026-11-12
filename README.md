@@ -4,11 +4,10 @@ Sumi is a connected workspace for creator campaigns, group gifts, and office sho
 
 ## Try the demo
 
-1. Open the [production workspace](https://sumi.company) and choose **Get started** → **Creator campaigns**.
-2. Sign in with Google, then enter the preview access code when prompted. Google OAuth is in Testing mode: your Google account must first be added as a test user.
-3. Enter a campaign brief or choose a sample. Review the proposed direction and start the agents. Creator profiles and outreach are fictional; payments are PayPal Sandbox transactions.
+1. Judges: open [judge access](https://sumi.company/workspace?judge=1) and enter the code in the private Devpost testing instructions. No Google account is required.
+2. Enter a campaign brief or choose a sample. Review the proposed direction and start the agents. Creator profiles and outreach are fictional; payments are PayPal Sandbox transactions.
 
-Judges: see the private testing instructions in the Devpost submission for the access arrangements. The [release preview](https://sume-candidate-jph-2026.vercel.app) is used for verification.
+Other preview users can continue to use Google sign-in and the existing preview access code. Google OAuth is in Testing mode, so those accounts must be added as test users.
 
 ## Run locally
 

@@ -1,91 +1,25 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { TaskBoard } from "@bryntum/taskboard-community";
-import "@fortawesome/fontawesome-free/css/fontawesome.css";
-import "@fortawesome/fontawesome-free/css/solid.css";
-import "@bryntum/taskboard-community/taskboard.css";
-import "@bryntum/taskboard-community/svalbard.css";
 import { creators, stages } from "../../../lib/creator/catalog";
-import type { Campaign } from "../../../lib/creator/policy";
-export default function CreatorBoard({
-  state,
-  onSelect,
-}: {
-  state: Campaign;
-  onSelect: (id: string) => void;
-}) {
-  const host = useRef<HTMLDivElement>(null),
-    select = useRef(onSelect);
-  select.current = onSelect;
-  const [stage, setStage] = useState("all");
-  const tasks = [
-    ...state.candidates.map((c) => c.id),
-    ...state.deals.map((d) => d.creatorId),
-  ]
-    .filter((id, i, a) => a.indexOf(id) === i)
-    .map((id) => ({
-      id,
-      name: creators.find((c) => c.id === id)!.name,
-      status:
-        state.deals.find((d) => d.creatorId === id)?.stage || "shortlisted",
-    }));
-  const signature = JSON.stringify(tasks);
-  useEffect(() => {
-    if (!host.current) return;
-    const board = new TaskBoard({
-      appendTo: host.current,
-      height: 360,
-      readOnly: true,
-      columnField: "status",
-      columns: stages.map((c) => ({ ...c, minWidth: 190, collapsible: false })),
-      project: { tasks: JSON.parse(signature) },
-      features: {
-        columnToolbars: false,
-        columnHeaderMenu: false,
-        taskMenu: false,
-        taskEdit: false,
-        taskDrag: false,
-      },
-      onTaskClick: ({ taskRecord }) => select.current(String(taskRecord.id)),
-    });
-    return () => board.destroy();
-  }, [signature]);
-  return (
-    <>
-      <div
-        className="hidden overflow-hidden rounded-2xl border border-border md:block"
-        aria-label="Campaign board"
-        ref={host}
-      />
-      <div className="flex flex-col gap-3 md:hidden">
-        <label className="text-sm">
-          Stage
-          <select
-            className="ml-3 rounded-lg border p-2"
-            value={stage}
-            onChange={(e) => setStage(e.target.value)}
-          >
-            <option value="all">All</option>
-            {stages.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.text}
-              </option>
-            ))}
-          </select>
-        </label>
-        {tasks
-          .filter((t) => stage === "all" || t.status === stage)
-          .map((t) => (
-            <button
-              key={t.id}
-              className="flex justify-between rounded-xl bg-muted p-4 text-left text-sm"
-              onClick={() => onSelect(t.id)}
-            >
-              {t.name}
-              <span>{stages.find((s) => s.id === t.status)?.text}</span>
-            </button>
-          ))}
-      </div>
-    </>
-  );
+import type { Campaign, Deal } from "../../../lib/creator/policy";
+
+const money = (cents: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: cents % 100 ? 2 : 0 }).format(cents / 100);
+function paymentStatus(deal: Deal) {
+  const payments = deal.installments?.map((item) => item.payment) || [deal.payment];
+  if (payments.some((status) => status === "review")) return "Needs review";
+  if (payments.some((status) => status === "pending")) return "Pending";
+  if (payments.every((status) => status === "confirmed")) return "Paid in Sandbox";
+  if (payments.some((status) => status === "confirmed")) return "Partially paid in Sandbox";
+  return "Not initiated";
+}
+export default function CreatorBoard({ state, onSelect }: { state: Campaign; onSelect: (id: string) => void }) {
+  const ids = [...new Set([...state.candidates.map((candidate) => candidate.id), ...state.deals.map((deal) => deal.creatorId)])];
+  const tasks = ids.map((id) => ({ id, creator: creators.find((creator) => creator.id === id), deal: state.deals.find((deal) => deal.creatorId === id) }));
+  const committed = state.deals.filter((deal) => deal.approved).reduce((sum, deal) => sum + deal.totalCents, 0);
+  return <div className="flex min-h-0 flex-1 flex-col gap-5" aria-label="Campaign board">
+    <div className="flex flex-wrap gap-x-6 gap-y-2 rounded-xl border border-border px-4 py-3 text-sm"><span>Budget: {state.brief.budgetCents === null ? "Not set" : money(state.brief.budgetCents)}</span><span>Committed: {money(committed)}</span></div>
+    <div tabIndex={0} role="region" aria-label="Campaign stages, scroll horizontally" className="min-h-0 flex-1 overflow-auto pb-1 focus-visible:outline-2 focus-visible:outline-ring"><div className="grid min-h-full min-w-[950px] grid-cols-5 gap-2">{stages.map((stage) => {
+      const inStage = tasks.filter(({ deal }) => (deal?.stage || "shortlisted") === stage.id);
+      return <section key={stage.id} aria-label={`${stage.text}, ${inStage.length}`} className="min-h-[420px] rounded-xl border border-border p-2.5"><h3 className="flex items-center justify-between px-1 pb-3 text-sm font-medium"><span>{stage.text}</span><span className="text-xs text-muted-foreground">{inStage.length}</span></h3><div className="space-y-2">{inStage.map(({ id, creator, deal }) => <button key={id} type="button" onClick={() => onSelect(id)} className="w-full rounded-xl border border-border bg-muted/40 p-3 text-left text-sm transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"><span className="block font-medium">{creator?.name || id}</span><span className="mt-1 block text-xs text-muted-foreground">{creator?.format || "Creator"}</span>{deal ? <><span className="mt-3 block">{money(deal.totalCents)} · {deal.approved ? "Terms approved" : "Sample terms"}</span><span className="mt-1 block text-xs text-muted-foreground">Payment: {paymentStatus(deal)}</span></> : <span className="mt-3 block text-xs text-muted-foreground">Sample quote · {creator ? money(creator.cents) : "Unavailable"}</span>}</button>)}</div></section>;
+    })}</div></div>
+  </div>;
 }
