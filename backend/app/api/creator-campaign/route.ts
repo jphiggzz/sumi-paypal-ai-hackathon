@@ -12,6 +12,7 @@ import { CreatorValidationError } from "../../../lib/creator/policy";
 import { authPool } from "../../../lib/auth";
 import { campaignPayoutReady } from "../../../lib/paypal";
 const command = z.discriminatedUnion("action", [
+  z.object({ action: z.literal("approve_deals"), revision: z.number().int().nonnegative(), deals: z.array(z.object({ dealId: z.uuid(), digest: z.string().regex(/^[a-f0-9]{64}$/) }).strict()).min(1).max(20) }).strict(),
   z.object({ action: z.literal("approve_business"), revision: z.number().int().nonnegative(), runId: z.uuid() }).strict(),
   z.object({ action: z.literal("outreach_draft"), revision: z.number().int().nonnegative(), creatorIds: z.array(z.string().max(80)).min(1).max(20), message: z.string().trim().min(1).max(3000) }).strict(),
   z.object({ action: z.literal("outreach_send"), revision: z.number().int().nonnegative() }).strict(),

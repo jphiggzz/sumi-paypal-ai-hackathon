@@ -8,6 +8,7 @@ import {
   applyAnswer,
   briefSchema,
   validateCommit,
+  approveDeals,
   type Answer,
   type Campaign,
   type Deal,
@@ -155,6 +156,7 @@ export async function commitCreatorTurn(
   });
 }
 export type CreatorCommand =
+  | { action: "approve_deals"; revision: number; deals: { dealId: string; digest: string }[] }
   | { action: "approve_business"; revision: number; runId: string }
   | { action: "outreach_draft"; revision: number; creatorIds: string[]; message: string }
   | { action: "outreach_send"; revision: number }
@@ -265,6 +267,8 @@ export async function creatorAction(
         .update(JSON.stringify({ campaign: cid, brief: c.brief, deal: d }))
         .digest("hex");
       c.deals.push(d);
+    } else if (command.action === "approve_deals") {
+      Object.assign(c, approveDeals(c, command.deals));
     } else if ("dealId" in command) {
       const d = c.deals.find(
         (x) => x.id === command.dealId && x.digest === command.digest,

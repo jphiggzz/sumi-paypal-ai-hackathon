@@ -271,6 +271,26 @@ export function validateCommit(c: Campaign, d: Deal) {
     );
 }
 
+// Approve exactly the terms reviewed, atomically. This never initiates payment.
+export function approveDeals(c: Campaign, reviewed: { dealId: string; digest: string }[]): Campaign {
+  if (!reviewed.length || new Set(reviewed.map((item) => item.dealId)).size !== reviewed.length)
+    throw new CreatorValidationError("Review the current deals again.");
+  const deals = reviewed.map((item) => c.deals.find((deal) => deal.id === item.dealId && deal.digest === item.digest));
+  if (deals.some((deal) => !deal)) throw new CreatorValidationError("A deal changed. Review the current terms again.");
+  if (deals.every((deal) => deal!.approved)) return c;
+  const pending = c.deals.filter((deal) => !deal.approved && deal.revision === c.revision);
+  if (deals.some((deal) => deal!.approved) || pending.length !== reviewed.length || pending.some((deal) => !reviewed.some((item) => item.dealId === deal.id)))
+    throw new CreatorValidationError("Deals changed. Review the current terms again.");
+  const next = structuredClone(c);
+  for (const item of reviewed) {
+    const deal = next.deals.find((entry) => entry.id === item.dealId)!;
+    validateCommit(next, deal);
+    deal.approved = true;
+    deal.stage = "agreed";
+  }
+  return next;
+}
+
 function canCite(
   message: { role: string; content: string },
   current: Campaign,

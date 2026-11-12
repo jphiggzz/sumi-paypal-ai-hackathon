@@ -1,0 +1,10 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { approveDeals, initialCampaign, type Deal } from "./creator/policy";
+const deal = (id: string, cents: number): Deal => ({ id, creatorId: id, revision: 1, stage: "negotiating", totalCents: cents, milestoneCents: 0, deliverable: "Post", rightsDays: 30, delivery: "Next week", digest: id, approved: false, payment: "none" });
+const fixture = () => ({ ...initialCampaign(), revision: 1, brief: { ...initialCampaign().brief, budgetCents: 1000 as number | null }, deals: [deal("a", 400), deal("b", 600)] });
+const reviewed = [{ dealId: "a", digest: "a" }, { dealId: "b", digest: "b" }];
+test("batch approves exact terms without payment and retries safely", () => { const original = fixture(); const approved = approveDeals(original, reviewed); assert.deepEqual(approved.deals.map((d) => [d.approved, d.stage, d.payment]), [[true, "agreed", "none"], [true, "agreed", "none"]]); assert.equal(original.deals[0].approved, false); assert.equal(approveDeals(approved, reviewed), approved); });
+test("batch rejects partial, duplicate, unknown and changed terms", () => { for (const input of [reviewed.slice(0, 1), [reviewed[0], reviewed[0]], [reviewed[0], { dealId: "x", digest: "x" }], [reviewed[0], { dealId: "b", digest: "changed" }]]) assert.throws(() => approveDeals(fixture(), input)); });
+test("budget validation is cumulative and atomic", () => { const c = fixture(); c.brief.budgetCents = 999; assert.throws(() => approveDeals(c, reviewed), /budget/); assert.ok(c.deals.every((d) => !d.approved && d.payment === "none")); c.brief.budgetCents = null; assert.throws(() => approveDeals(c, reviewed), /budget/); });
+test("batch rejects old revisions and conflicting approvals", () => { const c = fixture(); c.deals[1].revision = 0; assert.throws(() => approveDeals(c, reviewed)); const mixed = fixture(); mixed.deals[0].approved = true; assert.throws(() => approveDeals(mixed, reviewed)); });

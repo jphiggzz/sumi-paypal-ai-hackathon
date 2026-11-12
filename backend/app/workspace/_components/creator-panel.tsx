@@ -11,6 +11,8 @@ import { creators } from "../../../lib/creator/catalog";
 import { compactAgentSummary } from "../../../lib/creator/summary";
 import { CreatorOutreach } from "./creator-outreach";
 import { CreatorReport } from "./creator-report";
+import { CreatorDealsReview } from "./creator-deals-review";
+import { CreatorApprovalSchedule } from "./creator-approval-schedule";
 import type { Campaign } from "../../../lib/creator/policy";
 const Board = dynamic(() => import("./creator-board"), {
   ssr: false,
@@ -45,6 +47,7 @@ export default function CreatorPanel({
     [openRunId, setOpenRunId] = useState<string | null>(null),
     [shortlistRunId, setShortlistRunId] = useState<string | null>(null),
     [reportOpen, setReportOpen] = useState(false),
+    [dealsReviewOpen, setDealsReviewOpen] = useState(false),
     [runs, setRuns] = useState<
       {
         id: string;
@@ -195,7 +198,7 @@ export default function CreatorPanel({
                 delivery,
                 rightsDays,
                 paymentStructure,
-              })}
+              }).then((success) => { if (success) setSelected(""); })}
             />
           ) : (
             <>
@@ -531,8 +534,10 @@ export default function CreatorPanel({
                 </button>}
                 <div className="flex flex-wrap items-start gap-2">
                   {!!run.result.candidates.length && <Button variant="outline" onClick={() => setShortlistRunId(run.id)}>Review creators</Button>}
-                  {!historyOnly && run.status === "ready" && run.id === currentRun && !!run.result.candidates.length && <div className={state.outreach?.revision === state.revision ? "w-full" : ""}><CreatorOutreach state={state} busy={busy} act={act} onReview={setSelected} /></div>}
+                  {!historyOnly && run.status === "ready" && run.id === currentRun && !!run.result.candidates.length && <div className={state.outreach?.revision === state.revision ? "w-full" : ""}><CreatorOutreach state={state} busy={busy} act={act} onReview={(id) => { setSelected(id); }} /></div>}
                 </div>
+                {!historyOnly && run.status === "ready" && run.id === currentRun && <CreatorDealsReview state={state} busy={busy} act={act} onMessage={onMessage} open={dealsReviewOpen} setOpen={setDealsReviewOpen} />}
+                {!historyOnly && run.status === "ready" && run.id === currentRun && <CreatorApprovalSchedule state={state} onBoard={() => setView("board")} />}
                 <Dialog.Root open={shortlistRunId === run.id} onOpenChange={(open) => setShortlistRunId(open ? run.id : null)}><Dialog.Portal container={typeof document !== "undefined" ? document.querySelector<HTMLElement>("[data-unified-workspace]") : undefined}><Dialog.Overlay className="fixed inset-0 z-50 bg-black/50"/><Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85dvh] w-[min(760px,calc(100%-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-auto rounded-2xl bg-background p-5 shadow-xl" aria-describedby={undefined}>
                   <div className="flex items-center justify-between"><Dialog.Title className="text-base font-medium">Sample creators</Dialog.Title><Dialog.Close asChild><Button variant="ghost">Close</Button></Dialog.Close></div>
                   <div className="mt-3 divide-y divide-border">{run.result.candidates.map((candidate) => { const creator = run.result?.profiles?.find((entry) => entry.id === candidate.id) || creators.find((entry) => entry.id === candidate.id); if (!creator) return null; return <article key={candidate.id} className="space-y-2 py-3 text-sm"><div className="flex justify-between gap-3"><span className="font-medium">{creator.name}</span><span>{money(creator.cents)} · sample quote</span></div><p className="text-muted-foreground">{creator.platform} · {creator.format}</p><p>{candidate.reason}</p><details><summary>Evidence</summary>{candidate.evidenceIndexes.map((index) => <p key={index} className="mt-1">{creator.evidence[index]}</p>)}</details>{!historyOnly && run.id === currentRun && state.candidates.some((entry) => entry.id === candidate.id) && <div className="flex gap-2"><Button variant="outline" onClick={() => { setShortlistRunId(null); setSelected(candidate.id); }}>Review deal</Button><Button variant="ghost" aria-label={`Remove ${creator.name}`} onClick={() => { setShortlistRunId(null); onMessage(`Exclude ${creator.name} and find another creator.`); }}>Remove</Button></div>}</article>; })}</div>
